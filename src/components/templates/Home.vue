@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    
+    Pagina Home do Blog
   </div>
 </template>
 
