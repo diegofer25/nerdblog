@@ -59,7 +59,7 @@ export default {
 
     authenticated (user) {
       this.loginUser(user)
-      this.$router.push('/admin')
+      this.$router.push('/poster/admin')
     }
   }
 }

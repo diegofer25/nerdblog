@@ -19,12 +19,12 @@ export default new Router({
       component: () => import('./../components/templates/Poster'),
       children: [
         {
-          path: '/',
+          path: '/poster/',
           name: 'LoginForm',
           component: () => import('./../components/organims/LoginForm')
         },
         {
-          path: '/admin',
+          path: '/poster/admin',
           name: 'PosterAdmin',
           component: () => import('./../components/organims/PosterAdmin.vue')
         }
