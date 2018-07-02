@@ -22,6 +22,11 @@ export default new Router({
           path: '/',
           name: 'LoginForm',
           component: () => import('./../components/organims/LoginForm')
+        },
+        {
+          path: '/admin',
+          name: 'PosterAdmin',
+          component: () => import('./../components/organims/PosterAdmin.vue')
         }
       ]
     }]

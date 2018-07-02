@@ -36,8 +36,8 @@ export default {
       'loginUser'
     ]),
 
-    requestLogin (form) {
-      services.userService.login(form)
+    requestLogin () {
+      services.userService.login(this.form)
         .then((result) => {
           this.processLogin(result.data)
         }).catch((err) => {
@@ -59,7 +59,7 @@ export default {
 
     authenticated (user) {
       this.loginUser(user)
-      alert('logado')
+      this.$router.push('/admin')
     }
   }
 }
