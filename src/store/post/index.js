@@ -1,7 +1,12 @@
+import state from './state'
+import mutations from './mutations'
+import getters from './getters'
+import actions from './actions'
+
 export default {
   namespaced: true,
-  state: () => import('./state'),
-  mutations: () => import('./mutations'),
-  getters: () => import('./getters'),
-  actions: () => import('./actions')
+  state,
+  mutations,
+  getters,
+  actions
 }

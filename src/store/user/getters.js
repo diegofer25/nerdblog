@@ -1,1 +1,5 @@
-export default {}
+export default {
+  user (state) {
+    return state.user
+  }
+}

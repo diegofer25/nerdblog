@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h3>Pagina Home do poster</h3>
+    <h1>Nerd Blog</h1>
     <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Poster'
+  name: 'NerdBlog'
 }
 </script>

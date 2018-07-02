@@ -1,1 +1,7 @@
-export default {}
+export default {
+  loginUser: ({
+    commit
+  }, payload) => {
+    commit('loginUser', payload)
+  }
+}

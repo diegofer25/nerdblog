@@ -1,16 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import routes from './routes'
 
 Vue.use(Router)
 
 export default new Router({
-  routes: [
+  routes: [{
+    path: '/',
+    name: 'Nerd Blog',
+    component: () => import('./../components/pages/nerd-blog'),
+    children: [{
+      path: '/home',
+      name: 'Home',
+      component: () => import('./../components/templates/Home')
+    },
     {
-      path: '/',
-      name: 'Nerd Blog',
-      component: () => import('./../views/nerd-blog'),
-      children: routes
-    }
-  ]
+      path: '/poster',
+      name: 'Poster',
+      component: () => import('./../components/templates/Poster'),
+      children: [
+        {
+          path: '/',
+          name: 'LoginForm',
+          component: () => import('./../components/organims/LoginForm')
+        }
+      ]
+    }]
+  }]
 })
