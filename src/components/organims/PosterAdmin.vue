@@ -5,7 +5,7 @@
         <v-card class="my-3" hover>
           <v-card-media
             class="white--text"
-            height="170px"
+            height="250px"
             :src="post.urlImage">
             <v-container fill-height fluid>
               <v-layout>
@@ -19,18 +19,28 @@
             {{ post.content }}
           </v-card-text>
           <v-card-actions>
-            <v-btn color="primary">Editar</v-btn>
-            <v-btn color="red">Excluir</v-btn>
+            <v-btn color="primary"
+              @click="$router.push({
+                path: '/poster/editpost/' + post._id
+              })"> Editar
+            </v-btn>
+            <v-btn color="red" :disabled="loading" :loading="loading"
+              @click="askDelete(post)"> Excluir
+            </v-btn>
             <v-spacer></v-spacer>
             <v-btn flat>Preview</v-btn>
           </v-card-actions>
         </v-card>
       </div>
     </v-flex>
+    <nb-loading :loading="loading" />
+    <nb-alert :alert="alert" />
+    <nb-dialog :dialog="dialog" />
   </v-layout>
 </template>
 
 <script>
+import { Alert, Loading, Dialog } from './../molecules/'
 import { mapActions, mapGetters } from 'vuex'
 import services from './../../services'
 
@@ -46,7 +56,20 @@ export default {
   },
   data () {
     return {
-      title: 'Painel do Editor'
+      title: 'Painel do Editor',
+      loading: false,
+      alert: {
+        text: '',
+        color: 'success',
+        show: false
+      },
+      dialog: {
+        title: '',
+        text: '',
+        show: false,
+        action: () => {},
+        data: {}
+      }
     }
   },
   mounted () {
@@ -60,7 +83,46 @@ export default {
   methods: {
     ...mapActions('blog', [
       'setAuthorPosts'
-    ])
+    ]),
+
+    askDelete (post) {
+      this.dialog = {
+        title: 'Confirmação',
+        text: 'Deseja mesmo deletar o post ' + post.title,
+        show: true,
+        action: this.deletePost,
+        data: post
+      }
+    },
+
+    deletePost (post) {
+      this.loading = !this.loading
+      services.blogService.deletePost(post._id)
+        .then((result) => {
+          if (result.itsOk) {
+            this.processReponse(result)
+          }
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
+
+    processReponse (result) {
+      const attPost = this.authorPosts.filter((post) => post._id !== result.post._id)
+      this.setAuthorPosts(attPost)
+      this.loading = !this.loading
+      this.alert = {
+        text: result.post.title + ' deletado com sucesso!',
+        color: 'primary',
+        show: true
+      }
+    }
+  },
+
+  components: {
+    'nb-alert': Alert,
+    'nb-dialog': Dialog,
+    'nb-loading': Loading
   }
 }
 </script>

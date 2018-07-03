@@ -37,6 +37,14 @@ export default new Router({
         meta: {
           requiresAuth: true
         }
+      },
+      {
+        path: '/poster/editpost/:_id',
+        name: 'EditPost',
+        component: () => import('./../components/organims/EditPost'),
+        meta: {
+          requiresAuth: true
+        }
       }]
     }]
   },

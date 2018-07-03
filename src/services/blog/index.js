@@ -29,5 +29,25 @@ export default {
       }).catch((err) => {
         return err
       })
+  },
+
+  updatePost: (post) => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/post'
+    return axios.put(url, post)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
+  },
+
+  deletePost: (postId) => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/post?_id=' + postId
+    return axios.delete(url)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
   }
 }
