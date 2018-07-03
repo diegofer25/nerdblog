@@ -1,9 +1,11 @@
+const userStored = JSON.parse(localStorage.getItem('user'))
+
 export default {
   user: {
-    _id: '',
-    name: '',
-    fullName: '',
-    email: '',
-    isPoster: false
+    _id: userStored ? userStored._id : '',
+    name: userStored ? userStored.name : '',
+    fullName: userStored ? userStored.fullName : '',
+    email: userStored ? userStored.email : '',
+    isPoster: userStored ? userStored.isPoster : ''
   }
 }

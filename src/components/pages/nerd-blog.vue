@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h1>Nerd Blog</h1>
+  <v-app id="inspire" dark>
     <router-view/>
-  </div>
+  </v-app>
 </template>
 
 <script>
