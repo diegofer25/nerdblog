@@ -29,6 +29,14 @@ export default new Router({
         meta: {
           requiresAuth: true
         }
+      },
+      {
+        path: '/poster/addpost',
+        name: 'AddPost',
+        component: () => import('./../components/organims/AddPost'),
+        meta: {
+          requiresAuth: true
+        }
       }]
     }]
   },

@@ -8,11 +8,11 @@
         </v-toolbar>
         <v-card-text>
           <v-form ref="form">
-            <v-text-field prepend-icon="person" name="email" v-model="form.email"
+            <v-text-field prepend-icon="mail_outline" name="email" v-model="form.email"
               label="E-mail" ref="email" type="email" autocomplete required counter="50"
               placeholder="Ex: email@domain.com">
             </v-text-field>
-            <v-text-field prepend-icon="lock" name="password" v-model="form.password"
+            <v-text-field prepend-icon="lock_outline" name="password" v-model="form.password"
               label="Senha" ref="password" type="password" autocomplete required counter="16"
               placeholder="Informe sua senha">
             </v-text-field>
