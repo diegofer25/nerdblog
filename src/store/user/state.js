@@ -7,5 +7,11 @@ export default {
     fullName: userStored ? userStored.fullName : '',
     email: userStored ? userStored.email : '',
     isPoster: userStored ? userStored.isPoster : ''
+  },
+
+  alertUser: {
+    text: '',
+    color: 'success',
+    show: false
   }
 }

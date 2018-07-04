@@ -1,5 +1,5 @@
 <template>
-  <v-flex xs12 sm10 offset-sm1>
+  <v-flex xs12 pa-3>
     <v-form ref="form">
 
       <v-text-field name="title" v-model="form.title"
@@ -8,30 +8,52 @@
 
       <v-text-field name="urlImage" v-model="form.urlImage"
         placeholder="http://algumsite.com/imagem.jpg"
-        label="URL da imagem" ref="urlImage" type="text" autocomplete>
+        label="URL da imagem cover" ref="urlImage" type="text" autocomplete>
       </v-text-field>
-
-      <img width="100%" v-if="form.urlImage.length > 10" :src="form.urlImage">
 
       <v-select
         :items="categories.map((category) => category.name)" item-value="value.name"
         v-model="form.category" label="Categoria">
       </v-select>
 
-      <v-textarea ref="content" name="content" label="Conteúdo"
-        auto-grow outline row-height="50" counter="5000"
-        v-model="form.content">
-      </v-textarea>
+      <v-card light>
+        <v-card-media v-if="form.urlImage !== '' && form.title !== ''"
+          class="white--text"
+          height="500px" :src="form.urlImage">
+          <v-container fill-height fluid>
+            <v-layout fill-height>
+              <v-flex xs12 align-end flexbox>
+                <span class="headline">{{ form.title }}</span>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+        <v-card-title>
+          <vue-editor v-model="form.content" placeholder="Escreva aqui seu post incrível :D"></vue-editor>
+        </v-card-title>
+      </v-card>
+
     </v-form>
   </v-flex>
 </template>
 
 <script>
+import { VueEditor } from 'vue2-editor'
+
 export default {
   name: 'PostForm',
   props: [
     'form',
     'categories'
-  ]
+  ],
+  components: {
+    VueEditor
+  }
 }
 </script>
+
+<style>
+  .ql-container {
+    min-height: 300px;
+  }
+</style>

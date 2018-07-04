@@ -12,10 +12,17 @@
           <post-form :form="form" :categories="categories" />
         </v-card-text>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" @click.prevent="postPost">Postar</v-btn>
-        </v-card-actions>
+        <v-flex px-4 pb-2>
+          <v-card-actions pa-3>
+            <v-btn color="red" :disabled="loading" :loading="loading"
+              @click.stop="$router.push('/poster/admin')">
+              Cancelar
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click.prevent="postPost">Postar</v-btn>
+          </v-card-actions>
+        </v-flex>
+
       </v-card>
     </v-flex>
   </v-layout>

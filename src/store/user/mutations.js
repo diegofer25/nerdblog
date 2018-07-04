@@ -8,5 +8,24 @@ export default {
       email: user.email,
       isPoster: user.isPoster
     }
+  },
+
+  logoutUser: (state) => {
+    state.user = {
+      _id: '',
+      name: '',
+      fullName: '',
+      email: '',
+      isPoster: ''
+    }
+    return new Promise(() => 'ok')
+  },
+
+  alertUser: (state, payload) => {
+    state.alertUser = {
+      text: payload.text,
+      color: payload.color,
+      show: true
+    }
   }
 }

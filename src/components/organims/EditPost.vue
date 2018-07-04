@@ -10,21 +10,25 @@
 
         <v-card-text>
           <post-form :form="authorPosts.filter((post) => post._id === $route.params._id)[0]"
-            :categories="categories" />
+            :categories="categories"/>
         </v-card-text>
 
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" @click.prevent="savePost">Salvar</v-btn>
-        </v-card-actions>
+        <v-flex px-4 pb-2>
+          <v-card-actions pa-3>
+            <v-btn color="red" @click.stop="$router.push('/poster/admin')">
+              Cancelar
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" @click.prevent="savePost">Salvar</v-btn>
+          </v-card-actions>
+        </v-flex>
       </v-card>
-
     </v-flex>
   </v-layout>
 </template>
 
 <script>
-import PostForm from './../molecules/PostForm'
+import { PostForm } from './../molecules/'
 import services from './../../services'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -39,6 +43,15 @@ export default {
       'user'
     ])
   },
+  data () {
+    return {
+      alert: {
+        text: '',
+        color: 'success',
+        show: false
+      }
+    }
+  },
   mounted () {
     this.initCaseRestart()
   },
@@ -47,6 +60,9 @@ export default {
       'setCategories',
       'setAuthorPosts'
     ]),
+    ...mapActions('user', [
+      'alertUser'
+    ]),
 
     savePost () {
       const vm = this.$router
@@ -54,7 +70,10 @@ export default {
       services.blogService.updatePost(post)
         .then((result) => {
           if (result.itsOk) {
-            alert('Pos atualizado com sucesso')
+            this.alertUser({
+              text: 'Post atualizado com sucesso',
+              color: 'success'
+            })
             vm.push('/poster/admin')
           }
         })

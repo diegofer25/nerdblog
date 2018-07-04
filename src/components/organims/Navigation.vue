@@ -58,7 +58,25 @@
               <v-list-tile-action>
                 <v-icon>note_add</v-icon>
               </v-list-tile-action>
-              <v-list-tile-title>Criar uma nova categoria</v-list-tile-title>
+              <v-list-tile-title>Adicionar categoria</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-list-tile>
+      </v-list-group>
+
+      <v-list-group
+        prepend-icon="settings"
+        :value="false">
+        <v-list-tile slot="activator">
+          <v-list-tile-title>Configurações</v-list-tile-title>
+        </v-list-tile>
+        <v-list-tile>
+          <v-list>
+            <v-list-tile @click.stop="logout">
+              <v-list-tile-action>
+                <v-icon>exit_to_app</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-title >Sair</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-list-tile>
@@ -69,11 +87,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   name: 'Navigation',
   props: [
     'user',
     'drawer'
-  ]
+  ],
+  methods: {
+    ...mapActions('user', [
+      'logoutUser'
+    ]),
+    logout () {
+      localStorage.removeItem('user')
+      this.logoutUser()
+        .then(() => {
+          this.$router.push('/poster')
+        })
+    }
+  }
 }
 </script>

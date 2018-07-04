@@ -1,46 +1,17 @@
 <template>
   <v-layout row wrap align-center>
-    <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
+    <v-flex xs12 sm10 offset-sm1>
       <div v-for="post in authorPosts" :key="post.title">
-        <v-card class="my-3" hover>
-          <v-card-media
-            class="white--text"
-            height="250px"
-            :src="post.urlImage">
-            <v-container fill-height fluid>
-              <v-layout>
-                <v-flex xs12 align-end d-flex>
-                  <span class="headline">{{ post.title }}</span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-media>
-          <v-card-text>
-            {{ post.content }}
-          </v-card-text>
-          <v-card-actions>
-            <v-btn color="primary"
-              @click="$router.push({
-                path: '/poster/editpost/' + post._id
-              })"> Editar
-            </v-btn>
-            <v-btn color="red" :disabled="loading" :loading="loading"
-              @click="askDelete(post)"> Excluir
-            </v-btn>
-            <v-spacer></v-spacer>
-            <v-btn flat>Preview</v-btn>
-          </v-card-actions>
-        </v-card>
+        <nb-post-render :post="post" :loading="loading"/>
       </div>
     </v-flex>
     <nb-loading :loading="loading" />
-    <nb-alert :alert="alert" />
     <nb-dialog :dialog="dialog" />
   </v-layout>
 </template>
 
 <script>
-import { Alert, Loading, Dialog } from './../molecules/'
+import { Loading, Dialog, PostRender } from './../molecules/'
 import { mapActions, mapGetters } from 'vuex'
 import services from './../../services'
 
@@ -58,11 +29,6 @@ export default {
     return {
       title: 'Painel do Editor',
       loading: false,
-      alert: {
-        text: '',
-        color: 'success',
-        show: false
-      },
       dialog: {
         title: '',
         text: '',
@@ -84,7 +50,9 @@ export default {
     ...mapActions('blog', [
       'setAuthorPosts'
     ]),
-
+    ...mapActions('user', [
+      'alertUser'
+    ]),
     askDelete (post) {
       this.dialog = {
         title: 'Confirmação',
@@ -111,18 +79,17 @@ export default {
       const attPost = this.authorPosts.filter((post) => post._id !== result.post._id)
       this.setAuthorPosts(attPost)
       this.loading = !this.loading
-      this.alert = {
+      this.alertUser({
         text: result.post.title + ' deletado com sucesso!',
-        color: 'primary',
-        show: true
-      }
+        color: 'success'
+      })
     }
   },
 
   components: {
-    'nb-alert': Alert,
     'nb-dialog': Dialog,
-    'nb-loading': Loading
+    'nb-loading': Loading,
+    'nb-post-render': PostRender
   }
 }
 </script>
