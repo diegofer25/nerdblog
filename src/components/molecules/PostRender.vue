@@ -10,7 +10,8 @@
             <div class="post-info">
               <span class="headline">{{ post.title }}</span> <br>
               <span>
-                Criado em: {{ new Date(post.createdAt).toLocaleDateString() }}
+                Postado em: {{ new Date(post.createdAt).toLocaleDateString() }}
+                as {{ new Date(post.createdAt).toLocaleTimeString().split(':').splice(0,2).join('h') }}
               </span>
             </div>
           </v-flex>
@@ -66,6 +67,10 @@ export default {
       'dialogUser',
       'setLoading'
     ]),
+    ...mapActions('blog', [
+      'setAuthorPosts'
+    ]),
+
     askDelete (post) {
       this.dialogUser({
         title: 'Confirmação',

@@ -1,7 +1,9 @@
 import Router from './routes'
 
 Router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.path === '/') {
+    next('/home')
+  } else if (to.matched.some(record => record.meta.requiresAuth)) {
     if (JSON.parse(localStorage.getItem('user'))) {
       next()
     } else if (to.path === '/-1') {

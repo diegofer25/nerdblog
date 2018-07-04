@@ -5,6 +5,6 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: colors.teal.darken3 // #E53935
+    primary: colors.teal.darken2 // #E53935
   }
 })

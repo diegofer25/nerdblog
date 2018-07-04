@@ -2,7 +2,7 @@
   <v-layout row wrap>
     <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4 mt-5>
       <v-card class="elevation-12">
-        <v-toolbar color="primary">
+        <v-toolbar color="primary" height="40px">
           <v-toolbar-title>Login</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>

@@ -9,5 +9,9 @@ export default {
     commit
   }, payload) => {
     commit('setAuthorPosts', payload)
+  },
+
+  setAllPosts: ({ commit }, payload) => {
+    commit('setAllPosts', payload)
   }
 }

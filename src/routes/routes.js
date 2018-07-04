@@ -14,46 +14,55 @@ export default new Router({
       component: () => import('./../components/templates/Home')
     },
     {
-      path: '/poster',
-      name: 'Poster',
-      component: () => import('./../components/templates/Poster'),
-      children: [{
-        path: '/poster/',
-        name: 'LoginForm',
-        component: () => import('./../components/organims/LoginForm')
-      },
-      {
-        path: '/poster/admin',
-        name: 'PosterAdmin',
-        component: () => import('./../components/organims/PosterAdmin.vue'),
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: '/poster/addpost',
-        name: 'AddPost',
-        component: () => import('./../components/organims/AddPost'),
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: '/poster/editpost/:_id',
-        name: 'EditPost',
-        component: () => import('./../components/organims/EditPost'),
-        meta: {
-          requiresAuth: true
-        }
-      },
-      {
-        path: '/poster/categories/',
-        name: 'CategoryManager',
-        component: () => import('./../components/organims/CategoryManager'),
-        meta: {
-          requiresAuth: true
-        }
-      }]
+      path: '/post/:post',
+      name: 'PostReader',
+      component: () => import('./../components/organims/PostReader')
+    }, {
+      path: '/category/:category',
+      name: 'Category',
+      component: () => import('./../components/organims/ShowByCategory')
+    }]
+  },
+  {
+    path: '/poster',
+    name: 'Poster',
+    component: () => import('./../components/templates/Poster'),
+    children: [{
+      path: '/poster/',
+      name: 'LoginForm',
+      component: () => import('./../components/organims/LoginForm')
+    },
+    {
+      path: '/poster/admin',
+      name: 'PosterAdmin',
+      component: () => import('./../components/organims/PosterAdmin.vue'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/poster/addpost',
+      name: 'AddPost',
+      component: () => import('./../components/organims/AddPost'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/poster/editpost/:_id',
+      name: 'EditPost',
+      component: () => import('./../components/organims/EditPost'),
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/poster/categories/',
+      name: 'CategoryManager',
+      component: () => import('./../components/organims/CategoryManager'),
+      meta: {
+        requiresAuth: true
+      }
     }]
   },
   {

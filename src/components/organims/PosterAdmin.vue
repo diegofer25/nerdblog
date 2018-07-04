@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap align-center>
-    <v-flex xs12 sm10 offset-sm1>
+    <v-flex xs12 sm10 offset-sm1 md8 offset-md2>
       <div v-for="post in authorPosts" :key="post.title">
         <nb-post-render :post="post"/>
       </div>

@@ -5,5 +5,9 @@ export default {
 
   authorPosts (state) {
     return state.authorPosts
+  },
+
+  allPosts (state) {
+    return state.allPosts
   }
 }

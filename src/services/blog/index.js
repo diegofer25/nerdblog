@@ -1,6 +1,16 @@
 import axios from 'axios'
 
 export default {
+  getAllPosts: () => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/post/all'
+    return axios.get(url)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
+  },
+
   getAllCategories: () => {
     const url = 'https://nerd-blog-api.azurewebsites.net/api/category/all'
     return axios.get(url)
