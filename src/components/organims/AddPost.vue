@@ -14,7 +14,7 @@
 
         <v-flex px-4 pb-2>
           <v-card-actions pa-3>
-            <v-btn color="red" :disabled="loading" :loading="loading"
+            <v-btn color="red"
               @click.stop="$router.push('/poster/admin')">
               Cancelar
             </v-btn>
@@ -68,6 +68,10 @@ export default {
     ...mapActions('blog', [
       'setCategories'
     ]),
+    ...mapActions('user', [
+      'alertUser'
+    ]),
+
     postPost () {
       var post = this.form
       post['authorId'] = this.user._id
@@ -76,7 +80,10 @@ export default {
       services.blogService.postToBlog(post)
         .then((result) => {
           this.form = { title: '', urlImage: '', content: '', category: '', comments: [] }
-          alert('"' + result.post.title + '" postado com sucesso!')
+          this.alertUser({
+            text: '"' + result.post.title + '" postado com sucesso!',
+            color: 'success'
+          })
           this.$router.push('/poster/admin')
         }).catch((err) => {
           console.log(err)

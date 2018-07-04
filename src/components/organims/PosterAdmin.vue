@@ -2,16 +2,24 @@
   <v-layout row wrap align-center>
     <v-flex xs12 sm10 offset-sm1>
       <div v-for="post in authorPosts" :key="post.title">
-        <nb-post-render :post="post" :loading="loading"/>
+        <nb-post-render :post="post"/>
       </div>
+
+      <v-tooltip top>
+        <v-btn large slot="activator"
+          color="primary"
+          dark fab fixed
+          bottom right @click.stop="$router.push('/poster/addpost')" >
+          <v-icon>edit</v-icon>
+        </v-btn>
+        <span>Novo Post</span>
+      </v-tooltip>
     </v-flex>
-    <nb-loading :loading="loading" />
-    <nb-dialog :dialog="dialog" />
   </v-layout>
 </template>
 
 <script>
-import { Loading, Dialog, PostRender } from './../molecules/'
+import { PostRender } from './../molecules/'
 import { mapActions, mapGetters } from 'vuex'
 import services from './../../services'
 
@@ -27,15 +35,7 @@ export default {
   },
   data () {
     return {
-      title: 'Painel do Editor',
-      loading: false,
-      dialog: {
-        title: '',
-        text: '',
-        show: false,
-        action: () => {},
-        data: {}
-      }
+      title: 'Painel do Editor'
     }
   },
   mounted () {
@@ -49,46 +49,10 @@ export default {
   methods: {
     ...mapActions('blog', [
       'setAuthorPosts'
-    ]),
-    ...mapActions('user', [
-      'alertUser'
-    ]),
-    askDelete (post) {
-      this.dialog = {
-        title: 'Confirmação',
-        text: 'Deseja mesmo deletar o post ' + post.title,
-        show: true,
-        action: this.deletePost,
-        data: post
-      }
-    },
-
-    deletePost (post) {
-      this.loading = !this.loading
-      services.blogService.deletePost(post._id)
-        .then((result) => {
-          if (result.itsOk) {
-            this.processReponse(result)
-          }
-        }).catch((err) => {
-          console.log(err)
-        })
-    },
-
-    processReponse (result) {
-      const attPost = this.authorPosts.filter((post) => post._id !== result.post._id)
-      this.setAuthorPosts(attPost)
-      this.loading = !this.loading
-      this.alertUser({
-        text: result.post.title + ' deletado com sucesso!',
-        color: 'success'
-      })
-    }
+    ])
   },
 
   components: {
-    'nb-dialog': Dialog,
-    'nb-loading': Loading,
     'nb-post-render': PostRender
   }
 }

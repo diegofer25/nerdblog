@@ -49,5 +49,35 @@ export default {
       }).catch((err) => {
         return err
       })
+  },
+
+  postCategory: (category) => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/category'
+    return axios.post(url, category)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
+  },
+
+  updateCategory: (category) => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/category'
+    return axios.put(url, category)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
+  },
+
+  deleteCategory: (categoryId) => {
+    const url = 'https://nerd-blog-api.azurewebsites.net/api/category?_id=' + categoryId
+    return axios.delete(url)
+      .then((result) => {
+        return result.data
+      }).catch((err) => {
+        return err
+      })
   }
 }

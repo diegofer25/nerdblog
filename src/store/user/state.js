@@ -13,5 +13,16 @@ export default {
     text: '',
     color: 'success',
     show: false
-  }
+  },
+
+  dialogUser: {
+    title: '',
+    text: '',
+    show: false,
+    action: () => {},
+    data: {}
+  },
+
+  loading: false,
+  drawer: true
 }

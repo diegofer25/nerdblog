@@ -1,19 +1,25 @@
 <template>
    <v-snackbar
-      v-model="alert.show"
-      :color="alert.color"
+      v-model="alertUser.show"
+      :color="alertUser.color"
       :timeout="2500"
       right top>
-      {{ alert.text }}
-      <v-btn dark flat @click="alert.show = false">
+      {{ alertUser.text }}
+      <v-btn dark flat @click="alertUser.show = false">
         Fechar
       </v-btn>
     </v-snackbar>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Alert',
-  props: ['alert']
+  computed: {
+    ...mapGetters('user', [
+      'alertUser'
+    ])
+  }
 }
 </script>

@@ -3,7 +3,7 @@
     <v-btn slot="activator" flat>Preview</v-btn>
     <v-card>
       <v-toolbar dark color="primary">
-        <v-btn icon dark @click.native="show = false">
+        <v-btn icon dark @click.stop="show = !show">
           <v-icon>close</v-icon>
         </v-btn>
         <v-toolbar-title>Preview</v-toolbar-title>
@@ -24,7 +24,12 @@
                 </v-layout>
               </v-container>
             </v-card-media>
-            <v-card-text v-html="post.content" />
+            <v-card-text>
+              <div id="render">
+                <vue-editor v-model="post.content" :editorToolbar="[]"
+                  :editorOptions="{ readOnly: true }"/>
+              </div>
+            </v-card-text>
           </v-card>
         </v-flex>
       </v-layout>
@@ -33,11 +38,31 @@
 </template>
 
 <script>
+import { VueEditor } from 'vue2-editor'
+
 export default {
   name: 'Preview',
   props: [
-    'show',
     'post'
-  ]
+  ],
+  data () {
+    return {
+      show: false
+    }
+  },
+  components: {
+    VueEditor
+  }
 }
 </script>
+
+<style>
+  #render .ql-container {
+    border: none !important;
+  }
+
+  #render .ql-toolbar {
+    display: none !important;
+    border: none !important;
+  }
+</style>

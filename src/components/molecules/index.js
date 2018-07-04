@@ -14,3 +14,7 @@ export const Preview = PreviewComponent
 export const PostRender = () => import('./PostRender')
 
 export const PostForm = () => import('./PostForm')
+
+export const CategoryCard = () => import('./CategoryCard')
+
+export const AddCategory = () => import('./AddCategory')

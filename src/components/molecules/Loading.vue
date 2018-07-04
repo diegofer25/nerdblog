@@ -1,14 +1,13 @@
 <template>
   <v-dialog
     v-model="loading"
-    hide-overlay
     persistent
     width="300">
     <v-card
       color="primary"
       dark>
       <v-card-text>
-        Please stand by
+        Aguarde...
         <v-progress-linear
           indeterminate
           color="white"
@@ -20,8 +19,14 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Loading',
-  props: ['loading']
+  computed: {
+    ...mapGetters('user', [
+      'loading'
+    ])
+  }
 }
 </script>

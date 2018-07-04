@@ -2,7 +2,7 @@
   <v-navigation-drawer
     clipped fixed v-model="drawer"
     app v-if="user._id !== ''"
-    mobile-break-point="900">
+    stateless>
     <v-layout row wrap align-center>
       <v-flex xs12 mt-3>
         <div class="text-xs-center">
@@ -54,50 +54,55 @@
         </v-list-tile>
         <v-list-tile>
           <v-list>
-            <v-list-tile @click="$router.push('/poster/addcategory')">
+            <v-list-tile @click="$router.push('/poster/categories')">
               <v-list-tile-action>
-                <v-icon>note_add</v-icon>
+                <v-icon>book</v-icon>
               </v-list-tile-action>
-              <v-list-tile-title>Adicionar categoria</v-list-tile-title>
+              <v-list-tile-title>Gerenciar Categorias</v-list-tile-title>
             </v-list-tile>
           </v-list>
         </v-list-tile>
       </v-list-group>
 
-      <v-list-group
-        prepend-icon="settings"
-        :value="false">
-        <v-list-tile slot="activator">
-          <v-list-tile-title>Configurações</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile>
-          <v-list>
-            <v-list-tile @click.stop="logout">
-              <v-list-tile-action>
-                <v-icon>exit_to_app</v-icon>
-              </v-list-tile-action>
-              <v-list-tile-title >Sair</v-list-tile-title>
-            </v-list-tile>
-          </v-list>
-        </v-list-tile>
-      </v-list-group>
+      <v-list-tile @click.stop="askLogout">
+        <v-list-tile-action>
+          <v-icon>exit_to_app</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>Sair</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
 
     </v-list>
   </v-navigation-drawer>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Navigation',
-  props: [
-    'user',
-    'drawer'
-  ],
+  props: ['drawer'],
+  computed: {
+    ...mapGetters('user', [
+      'user'
+    ])
+  },
   methods: {
     ...mapActions('user', [
-      'logoutUser'
+      'logoutUser',
+      'dialogUser'
     ]),
+
+    askLogout () {
+      this.dialogUser({
+        title: 'Confirmar Logout',
+        text: 'Deseja mesmo fazer logout?',
+        show: false,
+        action: this.logout,
+        data: null
+      })
+    },
+
     logout () {
       localStorage.removeItem('user')
       this.logoutUser()

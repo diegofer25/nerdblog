@@ -45,6 +45,14 @@ export default new Router({
         meta: {
           requiresAuth: true
         }
+      },
+      {
+        path: '/poster/categories/',
+        name: 'CategoryManager',
+        component: () => import('./../components/organims/CategoryManager'),
+        meta: {
+          requiresAuth: true
+        }
       }]
     }]
   },

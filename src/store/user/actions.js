@@ -11,5 +11,17 @@ export default {
 
   alertUser: ({ commit }, payload) => {
     commit('alertUser', payload)
+  },
+
+  dialogUser: ({ commit }, payload) => {
+    commit('dialogUser', payload)
+  },
+
+  setLoading: ({ commit }, payload) => {
+    commit('setLoading', payload)
+  },
+
+  toogleDrawer: ({ commit }, payload) => {
+    commit('toogleDrawer', payload)
   }
 }

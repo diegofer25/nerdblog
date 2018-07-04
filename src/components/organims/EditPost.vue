@@ -15,11 +15,13 @@
 
         <v-flex px-4 pb-2>
           <v-card-actions pa-3>
+
+            <v-spacer></v-spacer>
             <v-btn color="red" @click.stop="$router.push('/poster/admin')">
               Cancelar
             </v-btn>
-            <v-spacer></v-spacer>
             <v-btn color="primary" @click.prevent="savePost">Salvar</v-btn>
+
           </v-card-actions>
         </v-flex>
       </v-card>
@@ -65,7 +67,6 @@ export default {
     ]),
 
     savePost () {
-      const vm = this.$router
       const post = this.authorPosts.filter((post) => post._id === this.$route.params._id)[0]
       services.blogService.updatePost(post)
         .then((result) => {
@@ -74,7 +75,7 @@ export default {
               text: 'Post atualizado com sucesso',
               color: 'success'
             })
-            vm.push('/poster/admin')
+            this.$router.push('/poster/admin')
           }
         })
     },

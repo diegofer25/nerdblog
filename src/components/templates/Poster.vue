@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation :user="user" :drawer="drawer"/>
+    <navigation :drawer="drawer" />
     <v-toolbar app fixed clipped-left
       color="primary">
       <v-toolbar-side-icon
@@ -18,12 +18,14 @@
     <v-footer app fixed color="primary">
       <i>Nerd Blog &copy; {{ year }}</i>
     </v-footer>
-    <nb-alert :alert="alertUser" />
+    <nb-alert/>
+    <nb-dialog/>
+    <nb-loading/>
   </div>
 </template>
 
 <script>
-import { Alert } from './../molecules/'
+import { Alert, Dialog, Loading } from './../molecules/'
 import { mapGetters } from 'vuex'
 import Navigation from './../organims/Navigation'
 
@@ -31,20 +33,21 @@ export default {
   name: 'Poster',
   computed: {
     ...mapGetters('user', [
-      'user',
-      'alertUser'
+      'user'
     ])
   },
   data () {
     return {
       title: 'Nerd Blog Editor',
-      drawer: true,
+      drawer: false,
       year: new Date().getFullYear()
     }
   },
   components: {
     'navigation': Navigation,
-    'nb-alert': Alert
+    'nb-alert': Alert,
+    'nb-dialog': Dialog,
+    'nb-loading': Loading
   }
 }
 </script>

@@ -1,15 +1,15 @@
 <template>
   <v-dialog
-      v-model="dialog.show"
+      v-model="dialogUser.show"
       max-width="300"
     >
       <v-card>
         <v-card-title class="headline">
-          {{ dialog.title }}
+          {{ dialogUser.title }}
         </v-card-title>
 
         <v-card-text>
-          {{ dialog.text }}
+          {{ dialogUser.text }}
         </v-card-text>
 
         <v-card-actions>
@@ -18,7 +18,7 @@
           <v-btn
             color="error"
             flat="flat"
-            @click.stop="dialog.show = false">
+            @click.stop="dialogUser.show = false">
             Não
           </v-btn>
 
@@ -34,13 +34,19 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Dialog',
-  props: ['dialog'],
+  computed: {
+    ...mapGetters('user', [
+      'dialogUser'
+    ])
+  },
   methods: {
     confirm () {
-      this.dialog.show = false
-      this.dialog.action(this.dialog.data)
+      this.dialogUser.show = false
+      this.dialogUser.action(this.dialogUser.data)
     }
   }
 }
