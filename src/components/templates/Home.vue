@@ -15,11 +15,11 @@
         </v-layout>
       <v-card>
         <v-container fluid grid-list-sm>
-          <v-layout row wrap justify-space-around fill-height>
+          <v-layout row wrap d-flex>
             <v-flex
               v-for="(post, index) in filteredPosts()"
-              xs12 :key="post._id"
-              v-bind="{ [`md${randomWidth((index), filteredPosts().length)}`]: true }">
+              :key="post._id"
+              v-bind="{ [`sm${randomWidth((index), filteredPosts().length)}`]: true }">
               <v-card hover>
                 <v-card-media
                   :src="post.urlImage"
@@ -29,8 +29,7 @@
                     fluid
                     pa-2>
                     <v-layout align-end>
-                      <v-flex flexbox
-                        v-bind="{ [`md${randomWidth(filteredPosts().length - (index + 1), filteredPosts().length)}`]: true }">
+                      <v-flex flexbox>
                         <div class="post-info">
                           <span class="title white--text" v-html="post.title"></span>
                           <p>
@@ -83,11 +82,8 @@ export default {
     ]),
 
     randomWidth (index, tamanho) {
-      const percent = (index / tamanho) * 100
-      if (percent <= 10) return 12
-      if (percent <= 50) return 6
-      if (percent <= 80) return 4
-      return 3
+      const tamanhos = [12, 6, 4, 3]
+      return tamanhos[parseInt(Math.random() * 4)]
     },
 
     filteredPosts () {

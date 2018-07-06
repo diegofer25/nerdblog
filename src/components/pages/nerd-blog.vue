@@ -14,7 +14,7 @@
 
         <v-list-group
           prepend-icon="explore"
-          value="true"
+          :value="false"
         >
           <v-list-tile slot="activator">
             <v-list-tile-title>Explorar</v-list-tile-title>
@@ -23,7 +23,7 @@
           <v-list-group
             no-action
             sub-group
-            value="true"
+            :value="false"
           >
             <v-list-tile slot="activator">
               <v-list-tile-title>Categorias</v-list-tile-title>
@@ -62,10 +62,7 @@
       <v-spacer></v-spacer>
 
       <v-menu
-        v-model="menu"
-        :close-on-content-click="false"
-        :nudge-width="350"
-        offset-x>
+        v-model="menu">
         <v-btn
           icon slot="activator" color="primary" dark>
           <v-icon flat>person</v-icon>
@@ -125,21 +122,41 @@
 
     </v-toolbar>
 
-    <v-content>
-      <v-container fluid>
-        <transition name="slide-fade">
-          <router-view />
-        </transition>
-      </v-container>
-    </v-content>
+    <v-flex mb-5>
+      <v-content>
+        <v-container fluid>
+          <transition name="slide-fade">
+            <router-view />
+          </transition>
+        </v-container>
+      </v-content>
+    </v-flex>
 
-    <v-footer app height="auto">
-    <v-card class="flex" flat tile>
-      <v-card-actions class="grey darken-3 justify-center">
-        &copy;2018 - Blog Nerd
-      </v-card-actions>
-    </v-card>
-  </v-footer>
+    <v-flex mt-5>
+      <v-footer
+        dark
+        height="auto" >
+        <v-card flat tile color="primary" class="white--text text-xs-center" >
+          <v-card-text>
+            <v-btn
+              v-for="icon in icons"
+              :key="icon" class="mx-3 white--text" icon >
+              <v-icon size="24px">{{ icon }}</v-icon>
+            </v-btn>
+          </v-card-text>
+
+          <v-card-text class="white--text pt-0">
+            Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+          </v-card-text>
+
+          <v-divider></v-divider>
+
+          <v-card-text class="white--text">
+            &copy;2018 — <strong>NerdBlog</strong>
+          </v-card-text>
+        </v-card>
+      </v-footer>
+    </v-flex>
 
   </v-app>
 </template>
@@ -158,7 +175,14 @@ export default {
   data () {
     return {
       navigator: false,
-      menu: false
+      menu: false,
+      icons: [
+        'fa fa-facebook',
+        'fa fa-twitter',
+        'fa fa-google-plus',
+        'fa fa-linkedin',
+        'fa fa-instagram'
+      ]
     }
   },
   methods: {
